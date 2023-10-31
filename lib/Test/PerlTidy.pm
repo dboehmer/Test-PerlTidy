@@ -156,7 +156,14 @@ sub list_files {
                   if $exclude_me;    # no need to check more exclusions...
             }
             return if $exclude_me;
-            if ( $fn->is_file && ( $fn =~ /\.(?:pl|pm|PL|t)\z/ ) ) {
+            if (
+                $fn->is_file
+                and (
+                    $fn    =~ m{(\A|[\\/])cpanfile\z} # cpanfile or .../cpanfile
+                    or $fn =~ /\.(?:cgi|pl|pm|psgi|PL|t)\z/   # known extensions
+                )
+              )
+            {
                 push @filenames, $fn;
             }
         },
