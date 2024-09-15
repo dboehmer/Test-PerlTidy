@@ -7,7 +7,7 @@ use Test::More tests => 1;
 
 use Test::PerlTidy ();
 
-my @wanted_files = sort qw(
+my @wanted_files = qw(
   Build.PL
   Makefile.PL
   lib/Test/PerlTidy.pm
@@ -24,7 +24,7 @@ my @wanted_files = sort qw(
   if $^O eq 'MSWin32';
 
 my @found_files =
-  Test::PerlTidy::list_files( path => '.', exclude => [ qr/blib|xt/, ], );
+  Test::PerlTidy::list_files( path => '.', exclude => [qr/blib|xt/] );
 
 # TEST
-is_deeply( \@wanted_files, \@found_files );
+is_deeply( [ sort @found_files ], \@wanted_files );

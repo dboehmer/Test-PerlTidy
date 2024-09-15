@@ -7,7 +7,7 @@ use Test::More tests => 1;
 
 use Test::PerlTidy ();
 
-my @wanted_files = sort qw(
+my @wanted_files = qw(
   Build.PL
   Makefile.PL
   scripts/tag-release.pl
@@ -29,4 +29,4 @@ my @found_files = Test::PerlTidy::list_files(
 );
 
 # TEST
-is_deeply( \@wanted_files, \@found_files );
+is_deeply( [ sort @found_files ], \@wanted_files );
